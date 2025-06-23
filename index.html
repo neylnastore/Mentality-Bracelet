@@ -1,1 +1,835 @@
-sddd
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENTALITY BRACELET - Importan.co</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e40af',
+                        accent: '#10b981',
+                        dark: '#1f2937',
+                        light: '#f9fafb',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+        
+        .price-cut {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .price-cut::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: #ef4444;
+            transform: rotate(-10deg);
+        }
+        
+        .gallery-image {
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        
+        .modal:not(.open) {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .modal:not(.open) .modal-content {
+            transform: scale(0.9);
+        }
+        
+        .notification {
+            animation: slideIn 0.5s forwards, slideOut 0.5s forwards 2.5s;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(100%); opacity: 0; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://scontent.fsub8-1.fna.fbcdn.net/v/t39.30808-1/480470725_122218523756059217_4375162344964440565_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=110&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=jfyepeJck3QQ7kNvwF2S-C2&_nc_oc=Adljd9pMRuCzpNymtc34UL-GSXTnubZZdFfUJhmwrhIEZhk6L73EuHJulHHJgYCeN-w&_nc_zt=24&_nc_ht=scontent.fsub8-1.fna&_nc_gid=COBS0edcQe4CYG84mmwjWA&oh=00_AfPxpvSpYJTeGcELFOIxRMC-6IBYSGgoC-IXl_-3EJpRTQ&oe=685B476E" alt="Importan.co Logo" class="h-10 w-10 rounded-full">
+                <span class="text-xl font-bold text-dark">Importan.co</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#features" class="text-gray-700 hover:text-primary font-medium">Fitur</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium">Testimoni</a>
+                <a href="#gallery" class="text-gray-700 hover:text-primary font-medium">Galeri</a>
+                <a href="#faq" class="text-gray-700 hover:text-primary font-medium">FAQ</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-1 bg-gray-100 px-3 py-1 rounded-full">
+                    <i class="fas fa-fire text-red-500"></i>
+                    <span class="text-sm font-medium" id="viewer-count">1,245</span>
+                    <span class="text-xs text-gray-500">sedang melihat</span>
+                </div>
+                <a href="#order" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-full font-medium transition duration-300">
+                    BELI SEKARANG
+                </a>
+                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-white shadow-lg hidden" id="mobile-menu">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#features" class="text-gray-700 hover:text-primary font-medium py-2 border-b">Fitur</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium py-2 border-b">Testimoni</a>
+                <a href="#gallery" class="text-gray-700 hover:text-primary font-medium py-2 border-b">Galeri</a>
+                <a href="#faq" class="text-gray-700 hover:text-primary font-medium py-2 border-b">FAQ</a>
+                <div class="flex items-center space-x-1 bg-gray-100 px-3 py-2 rounded-full justify-center">
+                    <i class="fas fa-fire text-red-500"></i>
+                    <span class="text-sm font-medium" id="mobile-viewer-count">1,245</span>
+                    <span class="text-xs text-gray-500">sedang melihat</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">MENTALITY BRACELET</h1>
+                    <p class="text-xl mb-6">Gelang eksklusif yang meningkatkan fokus, kepercayaan diri, dan energi positif dalam hidup Anda.</p>
+                    
+                    <div class="flex items-center mb-6">
+                        <div class="bg-white text-dark px-3 py-1 rounded-full mr-3">
+                            <span class="font-bold">TERBATAS</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-bolt text-yellow-400 mr-1"></i>
+                            <span>Tinggal <span id="stock-count">87</span> pcs lagi!</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-20 p-4 rounded-lg mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span>Harga Normal:</span>
+                            <span class="price-cut text-gray-300">Rp 267.000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">Harga Promo:</span>
+                            <span class="text-2xl font-bold">Rp 178.000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg mb-6">
+                        <div class="flex items-center justify-between">
+                            <span>Promo berakhir dalam:</span>
+                            <div class="flex space-x-2" id="countdown">
+                                <div class="text-center">
+                                    <div class="bg-white text-dark font-bold rounded px-2 py-1 text-lg">00</div>
+                                    <span class="text-xs">Jam</span>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-white text-dark font-bold rounded px-2 py-1 text-lg">00</div>
+                                    <span class="text-xs">Menit</span>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-white text-dark font-bold rounded px-2 py-1 text-lg">00</div>
+                                    <span class="text-xs">Detik</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#order" class="block w-full bg-accent hover:bg-green-600 text-white text-center font-bold py-4 px-6 rounded-lg shadow-lg transition duration-300 pulse">
+                        BELI SEKARANG JUGA <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://img.fantaskycdn.com/b57a5d85bafe1a2c0a1aa43c402acdb9.gif" alt="MENTALITY BRACELET" class="rounded-lg shadow-xl max-w-md w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Solution Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark mb-4">Masalah yang Sering Dihadapi</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Banyak orang mengalami tantangan mental dan emosional dalam kehidupan sehari-hari</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Kurang Fokus</h3>
+                    <p class="text-gray-600">Sulit berkonsentrasi pada pekerjaan atau studi karena banyaknya gangguan dan distraksi.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-heart text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Kepercayaan Diri Rendah</h3>
+                    <p class="text-gray-600">Meragukan kemampuan sendiri dan takut mengambil langkah penting dalam hidup.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-bolt text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Energi Negatif</h3>
+                    <p class="text-gray-600">Mudah terpengaruh energi negatif dari lingkungan sekitar yang mempengaruhi mood dan produktivitas.</p>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-primary to-secondary p-8 rounded-lg text-white">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-6 md:mb-0">
+                        <h2 class="text-2xl font-bold mb-3">Solusi: MENTALITY BRACELET</h2>
+                        <p class="mb-4">Gelang eksklusif ini dirancang khusus untuk membantu Anda mengatasi masalah mental dan emosional sehari-hari dengan meningkatkan fokus, kepercayaan diri, dan energi positif.</p>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-xl mr-2 text-accent"></i>
+                            <span>Material premium yang nyaman dipakai</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-xl mr-2 text-accent"></i>
+                            <span>Desain elegan cocok untuk pria dan wanita</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-xl mr-2 text-accent"></i>
+                            <span>Memberikan energi positif sepanjang hari</span>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3 flex justify-center">
+                        <img src="https://img.fantaskycdn.com/6cb090a9e4d0308bcfc1faaed2962cec.gif" alt="Solusi" class="rounded-lg max-w-xs w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark mb-4">Fitur Unggulan MENTALITY BRACELET</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Dirancang khusus untuk memberikan manfaat maksimal bagi penggunanya</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-gem text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Material Premium</h3>
+                    <p class="text-gray-600">Terbuat dari bahan berkualitas tinggi yang tahan lama dan nyaman dipakai sepanjang hari.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-magic text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Energi Positif</h3>
+                    <p class="text-gray-600">Membantu menangkal energi negatif dan meningkatkan aura positif dalam diri Anda.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-bullseye text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Fokus Maksimal</h3>
+                    <p class="text-gray-600">Membantu meningkatkan konsentrasi dan fokus dalam bekerja atau belajar.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Kepercayaan Diri</h3>
+                    <p class="text-gray-600">Memberikan dorongan mental untuk lebih percaya diri dalam situasi apapun.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-heartbeat text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Keseimbangan Emosi</h3>
+                    <p class="text-gray-600">Membantu menstabilkan emosi dan mengurangi stres dalam kehidupan sehari-hari.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 text-primary w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-star text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Gaya Elegan</h3>
+                    <p class="text-gray-600">Desain modern dan elegan yang cocok untuk berbagai kesempatan dan gaya berpakaian.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark mb-4">Apa Kata Mereka?</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Testimoni nyata dari pengguna MENTALITY BRACELET</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3">AS</div>
+                        <div>
+                            <h4 class="font-bold">Andi S.</h4>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Sejak pakai gelang ini, fokus kerja saya meningkat drastis. Produktivitas naik dan lebih percaya diri saat meeting dengan klien."</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3">DW</div>
+                        <div>
+                            <h4 class="font-bold">Dewi W.</h4>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Awalnya ragu, tapi setelah 2 minggu pakai, emosi lebih stabil. Ga gampang marah lagi dan lebih sabar menghadapi masalah."</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3">RS</div>
+                        <div>
+                            <h4 class="font-bold">Rudi S.</h4>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Desainnya keren banget, banyak yang nanya beli dimana. Yang penting manfaatnya terasa, lebih PD presentasi di kantor."</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3">LM</div>
+                        <div>
+                            <h4 class="font-bold">Lina M.</h4>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Bahan premium dan nyaman dipakai sehari-hari. Yang paling berasa adalah energi positifnya, mood lebih terjaga seharian."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark mb-4">Galeri Produk</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Lihat keindahan dan detail MENTALITY BRACELET</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://img.fantaskycdn.com/b57a5d85bafe1a2c0a1aa43c402acdb9.gif" alt="MENTALITY BRACELET 1" class="w-full h-48 object-cover rounded-lg gallery-image" data-src="https://img.fantaskycdn.com/b57a5d85bafe1a2c0a1aa43c402acdb9.gif">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://img.fantaskycdn.com/6cb090a9e4d0308bcfc1faaed2962cec.gif" alt="MENTALITY BRACELET 2" class="w-full h-48 object-cover rounded-lg gallery-image" data-src="https://img.fantaskycdn.com/6cb090a9e4d0308bcfc1faaed2962cec.gif">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://img.fantaskycdn.com/0160faa672e34713c4e6dbd0d3a2afed.gif" alt="MENTALITY BRACELET 3" class="w-full h-48 object-cover rounded-lg gallery-image" data-src="https://img.fantaskycdn.com/0160faa672e34713c4e6dbd0d3a2afed.gif">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://img.fantaskycdn.com/8f49d3481a2053e4c4a387a02467d06d_1080x.jpeg" alt="MENTALITY BRACELET 4" class="w-full h-48 object-cover rounded-lg gallery-image" data-src="https://img.fantaskycdn.com/8f49d3481a2053e4c4a387a02467d06d_1080x.jpeg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://img.fantaskycdn.com/49406f957d03d77f6b1de6d638ad7ae2_1080x.jpeg" alt="MENTALITY BRACELET 5" class="w-full h-48 object-cover rounded-lg gallery-image" data-src="https://img.fantaskycdn.com/49406f957d03d77f6b1de6d638ad7ae2_1080x.jpeg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://img.fantaskycdn.com/996c1f8421084c1a647566e6f871ef76_1080x.jpeg" alt="MENTALITY BRACELET 6" class="w-full h-48 object-cover rounded-lg gallery-image" data-src="https://img.fantaskycdn.com/996c1f8421084c1a647566e6f871ef76_1080x.jpeg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://img.fantaskycdn.com/e0c33a8e1d2ee6a83c7510b83d5d4c10.jpeg" alt="MENTALITY BRACELET 7" class="w-full h-48 object-cover rounded-lg gallery-image" data-src="https://img.fantaskycdn.com/e0c33a8e1d2ee6a83c7510b83d5d4c10.jpeg">
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://img.fantaskycdn.com/0160faa672e34713c4e6dbd0d3a2afed.gif" alt="MENTALITY BRACELET 8" class="w-full h-48 object-cover rounded-lg gallery-image" data-src="https://img.fantaskycdn.com/0160faa672e34713c4e6dbd0d3a2afed.gif">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="modal fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4" id="image-modal">
+        <div class="modal-content bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-auto">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-lg font-bold">MENTALITY BRACELET</h3>
+                <button class="text-gray-500 hover:text-gray-700" id="close-modal">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <img src="" alt="" class="w-full h-auto" id="modal-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark mb-4">Pertanyaan yang Sering Diajukan</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Temukan jawaban atas pertanyaan Anda tentang MENTALITY BRACELET</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="border rounded-lg overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 bg-gray-50 hover:bg-gray-100 font-medium flex justify-between items-center">
+                        <span>Bagaimana cara kerja MENTALITY BRACELET?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">MENTALITY BRACELET dirancang dengan material khusus yang membantu menstabilkan energi tubuh Anda. Dengan memakainya secara rutin, gelang ini akan membantu meningkatkan fokus, kepercayaan diri, dan menangkal energi negatif dari lingkungan sekitar.</p>
+                    </div>
+                </div>
+                
+                <div class="border rounded-lg overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 bg-gray-50 hover:bg-gray-100 font-medium flex justify-between items-center">
+                        <span>Berapa lama efeknya terasa setelah dipakai?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">Efeknya bisa berbeda-beda tergantung individu. Sebagian besar pengguna melaporkan merasakan perubahan dalam 3-7 hari pemakaian rutin. Untuk hasil maksimal, disarankan memakai gelang ini secara terus-menerus.</p>
+                    </div>
+                </div>
+                
+                <div class="border rounded-lg overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 bg-gray-50 hover:bg-gray-100 font-medium flex justify-between items-center">
+                        <span>Apakah bisa dipakai saat mandi atau berenang?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">MENTALITY BRACELET tahan air dan bisa dipakai saat mandi. Namun untuk berenang atau aktivitas air lainnya, disarankan untuk melepasnya terlebih dahulu untuk menjaga keawetan material.</p>
+                    </div>
+                </div>
+                
+                <div class="border rounded-lg overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 bg-gray-50 hover:bg-gray-100 font-medium flex justify-between items-center">
+                        <span>Bagaimana cara perawatannya?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">Perawatan sangat mudah. Cukup bersihkan dengan lap lembut jika kotor. Hindari penggunaan bahan kimia keras atau alkohol. Simpan di tempat kering saat tidak dipakai.</p>
+                    </div>
+                </div>
+                
+                <div class="border rounded-lg overflow-hidden">
+                    <button class="faq-question w-full text-left p-4 bg-gray-50 hover:bg-gray-100 font-medium flex justify-between items-center">
+                        <span>Apakah ada garansi untuk produk ini?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer p-4 border-t hidden">
+                        <p class="text-gray-600">Kami memberikan garansi 30 hari uang kembali jika Anda tidak puas dengan produk kami. Untuk kerusakan akibat cacat produksi, kami memberikan garansi penggantian selama 6 bulan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order" class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Siap Mengubah Hidup Anda?</h2>
+                <p class="text-xl mb-6">Dapatkan MENTALITY BRACELET sekarang dan rasakan perbedaannya!</p>
+                
+                <div class="bg-white bg-opacity-20 p-6 rounded-lg inline-block mb-8">
+                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold">Rp 178.000</div>
+                            <div class="text-sm">Harga Promo</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl price-cut">Rp 267.000</div>
+                            <div class="text-sm">Harga Normal</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                        <div class="flex items-center justify-center space-x-2">
+                            <i class="fas fa-check-circle text-accent"></i>
+                            <span>Material Premium</span>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                        <div class="flex items-center justify-center space-x-2">
+                            <i class="fas fa-check-circle text-accent"></i>
+                            <span>Garansi 30 Hari</span>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                        <div class="flex items-center justify-center space-x-2">
+                            <i class="fas fa-check-circle text-accent"></i>
+                            <span>Pengiriman Cepat</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg mb-8">
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold" id="order-stock-count">87</div>
+                            <div class="text-sm">Stok Tersisa</div>
+                        </div>
+                        <div class="h-10 w-px bg-white bg-opacity-30"></div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold" id="order-viewer-count">1,245</div>
+                            <div class="text-sm">Sedang Melihat</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg mb-8">
+                    <div class="flex items-center justify-center space-x-4">
+                        <span>Promo berakhir dalam:</span>
+                        <div class="flex space-x-2" id="order-countdown">
+                            <div class="text-center">
+                                <div class="bg-white text-dark font-bold rounded px-2 py-1">00</div>
+                                <span class="text-xs">Jam</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-white text-dark font-bold rounded px-2 py-1">00</div>
+                                <span class="text-xs">Menit</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-white text-dark font-bold rounded px-2 py-1">00</div>
+                                <span class="text-xs">Detik</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="https://vera.orderonline.id/mentality-bracelet" class="inline-block w-full md:w-auto bg-accent hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition duration-300 text-lg pulse">
+                    <i class="fas fa-shopping-cart mr-2"></i> BELI SEKARANG
+                </a>
+                
+                <div class="mt-4 text-sm opacity-80">
+                    <i class="fas fa-lock mr-1"></i> Pembayaran aman melalui sistem terenkripsi
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <img src="https://scontent.fsub8-1.fna.fbcdn.net/v/t39.30808-1/480470725_122218523756059217_4375162344964440565_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=110&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=jfyepeJck3QQ7kNvwF2S-C2&_nc_oc=Adljd9pMRuCzpNymtc34UL-GSXTnubZZdFfUJhmwrhIEZhk6L73EuHJulHHJgYCeN-w&_nc_zt=24&_nc_ht=scontent.fsub8-1.fna&_nc_gid=COBS0edcQe4CYG84mmwjWA&oh=00_AfPxpvSpYJTeGcELFOIxRMC-6IBYSGgoC-IXl_-3EJpRTQ&oe=685B476E" alt="Importan.co Logo" class="h-8 w-8 rounded-full">
+                    <span class="text-lg font-bold">Importan.co</span>
+                </div>
+                
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="#" class="hover:text-primary transition duration-300">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-primary transition duration-300">Syarat & Ketentuan</a>
+                    <a href="#" class="hover:text-primary transition duration-300">Kontak Kami</a>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-primary flex items-center justify-center transition duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-primary flex items-center justify-center transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-700 hover:bg-primary flex items-center justify-center transition duration-300">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-sm text-gray-400">
+                <p>&copy; 2023 Importan.co. All rights reserved.</p>
+                <p class="mt-1">MENTALITY BRACELET adalah produk eksklusif dari Importan.co</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fake Order Notification -->
+    <div class="notification fixed bottom-4 right-4 bg-white shadow-xl rounded-lg p-4 z-50 max-w-xs hidden" id="fake-notification">
+        <div class="flex justify-between items-start mb-2">
+            <div class="flex items-center">
+                <div class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-2" id="notification-avatar">AB</div>
+                <div>
+                    <div class="font-medium" id="notification-name">Andi B.</div>
+                    <div class="text-xs text-gray-500" id="notification-location">Jakarta</div>
+                </div>
+            </div>
+            <div class="text-xs text-gray-500">Baru saja</div>
+        </div>
+        <div class="text-sm">Baru saja memesan <span class="font-medium">MENTALITY BRACELET</span></div>
+        <button class="absolute top-2 right-2 text-gray-400 hover:text-gray-600" id="close-notification">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('transform');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Gallery Modal
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeModal = document.getElementById('close-modal');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').getAttribute('data-src');
+                modalImage.setAttribute('src', imgSrc);
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+        
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Dynamic Counters
+        function animateCounter(element, target, duration = 2000) {
+            const start = parseInt(element.textContent.replace(/,/g, ''));
+            const increment = (target - start) / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    clearInterval(timer);
+                    current = target;
+                }
+                element.textContent = Math.floor(current).toLocaleString();
+            }, 16);
+        }
+        
+        // Initialize counters
+        const viewerCount = document.getElementById('viewer-count');
+        const mobileViewerCount = document.getElementById('mobile-viewer-count');
+        const orderViewerCount = document.getElementById('order-viewer-count');
+        const stockCount = document.getElementById('stock-count');
+        const orderStockCount = document.getElementById('order-stock-count');
+        
+        // Set random values for demo
+        const randomViewers = Math.floor(Math.random() * 500) + 1000;
+        const randomStock = Math.floor(Math.random() * 20) + 70;
+        
+        viewerCount.textContent = randomViewers.toLocaleString();
+        mobileViewerCount.textContent = randomViewers.toLocaleString();
+        orderViewerCount.textContent = randomViewers.toLocaleString();
+        stockCount.textContent = randomStock;
+        orderStockCount.textContent = randomStock;
+
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 0);
+            
+            const diff = endOfDay - now;
+            
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // Update main countdown
+            const countdownElements = document.getElementById('countdown').children;
+            countdownElements[0].firstElementChild.textContent = hours.toString().padStart(2, '0');
+            countdownElements[1].firstElementChild.textContent = minutes.toString().padStart(2, '0');
+            countdownElements[2].firstElementChild.textContent = seconds.toString().padStart(2, '0');
+            
+            // Update order section countdown
+            const orderCountdownElements = document.getElementById('order-countdown').children;
+            orderCountdownElements[0].firstElementChild.textContent = hours.toString().padStart(2, '0');
+            orderCountdownElements[1].firstElementChild.textContent = minutes.toString().padStart(2, '0');
+            orderCountdownElements[2].firstElementChild.textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Initialize countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Fake Order Notification
+        const names = ['Andi', 'Budi', 'Citra', 'Dewi', 'Eka', 'Fajar', 'Gita', 'Hadi', 'Indra', 'Joko'];
+        const locations = ['Jakarta', 'Bandung', 'Surabaya', 'Medan', 'Makassar', 'Semarang', 'Yogyakarta', 'Bali', 'Lombok', 'Palembang'];
+        
+        function showFakeNotification() {
+            const notification = document.getElementById('fake-notification');
+            const avatar = document.getElementById('notification-avatar');
+            const nameEl = document.getElementById('notification-name');
+            const locationEl = document.getElementById('notification-location');
+            
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+            const initials = randomName.split(' ').map(n => n[0]).join('');
+            
+            avatar.textContent = initials;
+            nameEl.textContent = randomName + '.';
+            locationEl.textContent = randomLocation;
+            
+            notification.classList.remove('hidden');
+            
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Show first notification after 3 seconds
+        setTimeout(showFakeNotification, 3000);
+        
+        // Show subsequent notifications every 20-60 seconds
+        setInterval(showFakeNotification, Math.floor(Math.random() * 40000) + 20000);
+        
+        // Close notification button
+        document.getElementById('close-notification').addEventListener('click', function() {
+            document.getElementById('fake-notification').classList.add('hidden');
+        });
+
+        // Animate counters when scrolled into view
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('[data-animate]');
+            
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const isVisible = (rect.top <= window.innerHeight * 0.8) && (rect.bottom >= 0);
+                
+                if (isVisible && !el.classList.contains('animated')) {
+                    el.classList.add('animated');
+                    
+                    if (el.id === 'viewer-count' || el.id === 'mobile-viewer-count' || el.id === 'order-viewer-count') {
+                        animateCounter(el, parseInt(el.textContent.replace(/,/g, '')) + Math.floor(Math.random() * 100));
+                    } else if (el.id === 'stock-count' || el.id === 'order-stock-count') {
+                        animateCounter(el, parseInt(el.textContent) - Math.floor(Math.random() * 5));
+                    }
+                }
+            });
+        }
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Initial check
+        animateOnScroll();
+    </script>
+</body>
+</html>
